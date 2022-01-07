@@ -62,21 +62,25 @@ function Body() {
   }, [handleKeydown]);
 
   return (
-    <div className="text-justify">
-      {quote.split('').map((letter, letterIndex) => (
-        <span
-          className={
-            // eslint-disable-next-line no-nested-ternary
-            isLetterCorrect[letterIndex] === true
-              ? 'font-bold text-sky-500'
-              : isLetterCorrect[letterIndex] === false
-              ? 'font-bold text-rose-500'
-              : ''
-          }
-        >
-          {letter}
-        </span>
-      ))}
+    <div className="flex flex-col justify-between h-full px-2">
+      <div className="flex-1" />
+      <div className="text-justify">
+        {quote.split('').map((letter, letterIndex) => (
+          <span
+            className={
+              // eslint-disable-next-line no-nested-ternary
+              isLetterCorrect[letterIndex] === true
+                ? 'font-bold text-sky-500'
+                : isLetterCorrect[letterIndex] === false
+                ? 'font-bold text-rose-500'
+                : ''
+            }
+          >
+            {letter}
+          </span>
+        ))}
+      </div>
+      <div className="flex-1" />
     </div>
   );
 }
