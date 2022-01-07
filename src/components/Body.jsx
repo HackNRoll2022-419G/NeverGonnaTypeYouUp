@@ -1,3 +1,5 @@
+/* eslint-disable no-irregular-whitespace */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react';
 import getQuote from '../api/getQuote';
@@ -57,10 +59,10 @@ function Body() {
   const [netWPM, setNetWPM] = useState(0);
   const [accuracy, setAccuracy] = useState(0.0);
 
-  const [quote, setQuote] = useState(DEFAULT_QUOTE);
-  const [author, setAuthor] = useState(DEFAULT_AUTHOR);
+  const [quote, setQuote] = useState('');
+  const [author, setAuthor] = useState('');
 
-  const [letters, setLetters] = useState(DEFAULT_QUOTE.split(''));
+  const [letters, setLetters] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isLetterCorrect, setIsLetterCorrect] = useState([]);
 
@@ -76,11 +78,11 @@ function Body() {
     try {
       const res = await getQuote();
       setQuote(res.content);
-      setAuthor(res.author);
+      setAuthor(`--- ${res.author}`);
       setLetters(res.content.split(''));
     } catch (err) {
       setQuote(DEFAULT_QUOTE);
-      setAuthor(DEFAULT_AUTHOR);
+      setAuthor(`--- ${DEFAULT_AUTHOR}`);
       setLetters(DEFAULT_QUOTE.split(''));
       console.log('Fail to fetch data');
     }
@@ -89,6 +91,7 @@ function Body() {
   const untouchedLetterClass = 'text-slate-700';
   const correctLetterClass = 'text-blue-500';
   const incorrectLetterClass = 'text-rose-500';
+  const currentCursorClass = 'border-l-[3px] border-indigo-400 animate-blink';
 
   useEffect(refresh, []);
 
@@ -175,21 +178,29 @@ function Body() {
         <div className="flex flex-col text-justify font-mono">
           <div className="text-3xl mb-4">
             {quote.split('').map((letter, letterIndex) => (
-              <span
-                className={
-                  // eslint-disable-next-line no-nested-ternary
-                  isLetterCorrect[letterIndex] === true
-                    ? correctLetterClass
-                    : isLetterCorrect[letterIndex] === false
-                    ? incorrectLetterClass
-                    : untouchedLetterClass
-                }
-              >
-                {letter}
+              <span>
+                <span
+                  className={
+                    letterIndex === activeIndex ? currentCursorClass : ''
+                  }
+                >
+                  ​
+                </span>
+                <span
+                  className={
+                    isLetterCorrect[letterIndex] === true
+                      ? correctLetterClass
+                      : isLetterCorrect[letterIndex] === false
+                      ? incorrectLetterClass
+                      : untouchedLetterClass
+                  }
+                >
+                  {letter}
+                </span>
               </span>
             ))}
           </div>
-          <div className="text-xl italic">--- {author}</div>
+          <div className="text-xl italic">{author}</div>
         </div>
       )}
       <div className="flex-1" />
