@@ -13,6 +13,10 @@ function Body() {
   const [letters, setLetters] = useState(DEFAULT_QUOTE.split(''));
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const untouchedLetterClass = 'text-slate-700';
+  const correctLetterClass = 'text-sky-500';
+  const incorrectLetterClass = 'text-red-500';
+
   useEffect(async () => {
     try {
       const res = await getQuote();
@@ -29,14 +33,10 @@ function Body() {
     }
   }, []);
 
-  const [key, setKey] = useState('');
-
   const [isLetterCorrect, setIsLetterCorrect] = useState([]);
 
   const handleKeydown = (e) => {
     if (e.key.length === 1) {
-      setKey(e.key);
-
       if (e.key === letters[activeIndex]) {
         setIsLetterCorrect((prevIsLetterCorrect) => [
           ...prevIsLetterCorrect,
@@ -70,16 +70,16 @@ function Body() {
   return (
     <div className="flex flex-col justify-between h-full px-2">
       <div className="flex-1" />
-      <div className="text-justify">
+      <div className="text-justify font-mono text-2xl">
         {quote.split('').map((letter, letterIndex) => (
           <span
             className={
               // eslint-disable-next-line no-nested-ternary
               isLetterCorrect[letterIndex] === true
-                ? 'font-bold text-sky-500'
+                ? correctLetterClass
                 : isLetterCorrect[letterIndex] === false
-                ? 'font-bold text-rose-500'
-                : ''
+                ? incorrectLetterClass
+                : untouchedLetterClass
             }
           >
             {letter}
