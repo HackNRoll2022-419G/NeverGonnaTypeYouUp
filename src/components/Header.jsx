@@ -50,7 +50,7 @@ function Header({ dark, setDark }) {
       <div>
         <img src="logo.png" alt="logo" className="h-12 inline rounded" />
         <span className="text-lg mx-4">
-          Never Gonna <span className="text-blue-400">Type</span> You Up
+          Never Gonna <span className="text-blue-500">Type</span> You Up
         </span>
       </div>
       <button className={buttonClass} type="button" onClick={handleClick}>

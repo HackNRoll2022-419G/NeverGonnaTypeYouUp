@@ -87,8 +87,8 @@ function Body() {
   }
 
   const untouchedLetterClass = 'text-slate-700';
-  const correctLetterClass = 'text-sky-500';
-  const incorrectLetterClass = 'text-red-500';
+  const correctLetterClass = 'text-blue-500';
+  const incorrectLetterClass = 'text-rose-500';
 
   useEffect(refresh, []);
 
@@ -152,18 +152,28 @@ function Body() {
     <div className="flex flex-col justify-between h-full px-2">
       <div className="flex-1" />
       {isEnd ? (
-        <div lassName="flex flex-col">
-          <div className="flex flex-col">
-            <div>WPM: {netWPM}</div>
-            <div>ACC: {accuracy}%</div>
+        <div lassName="flex flex-col justify-center items-center">
+          <div className="flex flex-col text-center mb-12 font-mono text-4xl">
+            <div>
+              WPM: <span className="text-blue-400">{netWPM}</span>
+            </div>
+            <div>
+              ACC: <span className="text-blue-400">{accuracy}%</span>
+            </div>
           </div>
-          <button type="button" onClick={refresh}>
-            {refreshIcon}
-          </button>
+          <div className="text-center">
+            <button
+              className="hover:animate-spin text-slate-400"
+              type="button"
+              onClick={refresh}
+            >
+              {refreshIcon}
+            </button>
+          </div>
         </div>
       ) : (
-        <div className="flex flex-col text-justify font-mono text-3xl">
-          <div>
+        <div className="flex flex-col text-justify font-mono">
+          <div className="text-3xl mb-4">
             {quote.split('').map((letter, letterIndex) => (
               <span
                 className={
@@ -179,7 +189,7 @@ function Body() {
               </span>
             ))}
           </div>
-          <div>--- {author}</div>
+          <div className="text-xl italic">--- {author}</div>
         </div>
       )}
       <div className="flex-1" />
