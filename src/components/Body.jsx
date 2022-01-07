@@ -38,17 +38,23 @@ function Body() {
       setKey(e.key);
 
       if (e.key === letters[activeIndex]) {
-        setIsLetterCorrect([...isLetterCorrect, true]);
+        setIsLetterCorrect((prevIsLetterCorrect) => [
+          ...prevIsLetterCorrect,
+          true,
+        ]);
       } else {
-        setIsLetterCorrect([...isLetterCorrect, false]);
+        setIsLetterCorrect((prevIsLetterCorrect) => [
+          ...prevIsLetterCorrect,
+          false,
+        ]);
       }
-      setActiveIndex(activeIndex + 1);
+      setActiveIndex((prevActiveIndex) => prevActiveIndex + 1);
     } else if (e.key === 'Backspace') {
       if (activeIndex > 0) {
-        setIsLetterCorrect(
-          isLetterCorrect.slice(0, isLetterCorrect.length - 1)
+        setIsLetterCorrect((prevIsLetterCorrect) =>
+          prevIsLetterCorrect.slice(0, prevIsLetterCorrect.length - 1)
         );
-        setActiveIndex(activeIndex - 1);
+        setActiveIndex((prevActiveIndex) => prevActiveIndex - 1);
       }
     }
   };
