@@ -72,6 +72,18 @@ function Body() {
     setAccuracy(0.0);
     setIsLetterCorrect([]);
     setActiveIndex(0);
+
+    try {
+      const res = await getQuote();
+      setQuote(res.content);
+      setAuthor(res.author);
+      setLetters(res.content.split(''));
+    } catch (err) {
+      setQuote(DEFAULT_QUOTE);
+      setAuthor(DEFAULT_AUTHOR);
+      setLetters(DEFAULT_QUOTE.split(''));
+      console.log('Fail to fetch data');
+    }
   }
 
   const untouchedLetterClass = 'text-slate-700';
