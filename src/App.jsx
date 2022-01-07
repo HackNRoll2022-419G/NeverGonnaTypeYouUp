@@ -12,7 +12,7 @@ function App() {
   return (
     <div className={dark ? 'dark' : ''}>
       <div className="transition duration-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white grid grid-cols-1 justify-items-center min-h-screen">
-        <div className="flex flex-col max-w-screen-lg my-4 gap-4">
+        <div className="flex flex-col w-full max-w-screen-lg p-4 gap-4">
           <div>
             <Header dark={dark} setDark={setDark} />
           </div>
