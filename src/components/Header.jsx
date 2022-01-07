@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function Header() {
+function Header({ dark, setDark }) {
   const moonIcon = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -29,9 +30,6 @@ function Header() {
     </svg>
   );
 
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-  const [dark, setDark] = useState(prefersDark);
   const [buttonIconState, setButtonIconState] = useState('hover:scale-105');
 
   const toggleButton = dark ? moonIcon : sunIcon;
@@ -61,5 +59,10 @@ function Header() {
     </div>
   );
 }
+
+Header.propTypes = {
+  dark: PropTypes.bool.isRequired,
+  setDark: PropTypes.func.isRequired,
+};
 
 export default Header;
